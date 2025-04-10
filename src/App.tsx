@@ -78,65 +78,65 @@ function App() {
 
           <SubMenu key={'4'} title="PURCHASE" icon={<BiPurchaseTag />}>
             <Menu.Item>
-              Purchase
+            <Link to= '/Purchase'>Purchase</Link> 
             </Menu.Item>
             <Menu.Item>
-              Purchase Items
+            <Link to= '/PurchaseItems'>Purchase Items</Link>  
             </Menu.Item>
             <Menu.Item>
-              Accounts
+            <Link to= '/Accounts'>Accounts</Link>  
             </Menu.Item>
           </SubMenu>
 
           <SubMenu key={'5'} title="SALES">
             <Menu.Item>
-              Sales
+            <Link to= '/Sales'>Sales</Link>
             </Menu.Item>
             <Menu.Item>
-              Sales Items
+            <Link to= '/SalesItems'>Sales Items</Link> 
             </Menu.Item>
             <Menu.Item>
-              Discounts
+            <Link to= '/Discounts'>Discounts</Link> 
             </Menu.Item>
           </SubMenu>
 
           <SubMenu key={'6'} title="EXPENSE">
             <Menu.Item>
-              Expenses
+            <Link to= '/Expense'>Expense</Link> 
             </Menu.Item>
             <Menu.Item>
-              Expense Type
+            <Link to= '/ExpenseType'>Expense Type</Link>
             </Menu.Item>
           </SubMenu>
 
         
           <SubMenu key={'7'} title="CUSTOMER">
             <Menu.Item>
-              Customer
+            <Link to= '/Customer'>Customer</Link>  
             </Menu.Item>
             <Menu.Item>
-              Customer Accounts
+            <Link to= '/CustomerAccount'>Customer Account</Link>   
             </Menu.Item>
           </SubMenu>
 
           <SubMenu key={'8'} title="VENDOR">
             <Menu.Item>
-              Vendor
+            <Link to= '/Vendor'>Vendor</Link>  
             </Menu.Item>
             <Menu.Item>
-              Vendor Accounts
+            <Link to= '/VendorAccount'>Vendor Account</Link> 
             </Menu.Item>
           </SubMenu>
 
           <SubMenu key={'9'} title="LOCATION & INFRASTRUCTURE" icon={<IoLocationOutline />}>
             <Menu.Item>
-              Stores
+            <Link to= '/Stores'>Stores</Link>  
             </Menu.Item>
             <Menu.Item>
-              Warehouse
+            <Link to= '/Warehouse'>Warehouse</Link> 
             </Menu.Item>
             <Menu.Item>
-              Location
+            <Link to= '/Location'>Location</Link> 
             </Menu.Item>
           </SubMenu>
           
