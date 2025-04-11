@@ -20,7 +20,7 @@ import Purchase from './pages/Purchase.tsx'
 import PurchaseItems from './pages/PurchaseItems.tsx'
 import Accounts from './pages/Accounts.tsx'
 import SalesItems from './pages/SalesItems.tsx'
-import Sales from './pages/sales.tsx'
+import Sales from './pages/Sales.tsx'
 import Discounts from './pages/Discounts.tsx'
 import Expense from './pages/Expense.tsx'
 import ExpenseType from './pages/ExpenseType.tsx'
@@ -31,6 +31,7 @@ import VendorAccount from './pages/VendorAccount.tsx'
 import Stores from './pages/Stores.tsx'
 import Warehouse from './pages/Warehouse.tsx'
 import Location from './pages/Location.tsx'
+import { QueryClient, QueryClientProvider } from 'react-query'
 
 
 
@@ -155,9 +156,15 @@ const router = createBrowserRouter([
   }
 ])
 
+const queryClient = new QueryClient()
+
+
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
+    <QueryClientProvider client={queryClient}>
+
     <RouterProvider router={router} />
+    </QueryClientProvider>
   </StrictMode>
 );
 

@@ -1,9 +1,39 @@
+import React from 'react';
+import { Divider, Table } from 'antd';
+import type { TableColumnsType } from 'antd';
 
-
-function Users() {
-  return (
-    <div>Users</div>
-  )
+interface DataType {
+  key: React.Key;
+  name: string;
+  email: string;
 }
 
-export default Users
+const columns: TableColumnsType<DataType> = [
+  {
+    title: 'Name',
+    dataIndex: 'name',
+  },
+  {
+    title: 'Email',
+    dataIndex: 'email',
+  }
+];
+
+const data: DataType[] = [
+  {
+    key: '1',
+    name: 'www',
+    email: "ndsj"
+  },
+];
+
+const Users: React.FC = () => {
+  return (
+    <div>
+      <Divider>Users Table</Divider>
+      <Table<DataType> columns={columns} dataSource={data} size="middle" />
+    </div>
+  );
+};
+
+export default Users;
