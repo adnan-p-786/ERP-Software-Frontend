@@ -71,9 +71,6 @@ function App() {
             <Menu.Item>
             <Link to= '/units'>units</Link>  
             </Menu.Item>
-            <Menu.Item>
-            <Link to= '/Variants'>Variants</Link> 
-            </Menu.Item>
           </SubMenu>
 
           <SubMenu key={'4'} title="PURCHASE" icon={<BiPurchaseTag />}>

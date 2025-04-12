@@ -15,7 +15,6 @@ import Categories from './pages/Categories.tsx'
 import SubCategories from './pages/SubCategories.tsx'
 import Brand from './pages/Brand.tsx'
 import Units from './pages/Units.tsx'
-import Variants from './pages/Variants.tsx'
 import Purchase from './pages/Purchase.tsx'
 import PurchaseItems from './pages/PurchaseItems.tsx'
 import Accounts from './pages/Accounts.tsx'
@@ -87,10 +86,6 @@ const router = createBrowserRouter([
       {
         path:'/Units',
         element: <Units/>
-      },
-      {
-        path:'/Variants',
-        element: <Variants/>
       },
       {
         path:'/Purchase',
