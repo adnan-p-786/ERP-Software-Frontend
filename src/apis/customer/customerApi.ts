@@ -1,18 +1,18 @@
 import { apiCLient } from "../ApiCLient"
 
 
-export const getCustomer = ()=>{
-    return apiCLient.get('/get-customers')
+export const getCustomers = ()=>{
+    return apiCLient.get('api/get-customers')
 }
 
-export const postCustomer = ()=>{
-    return apiCLient.post('/post-customers')
+export const postCustomers = (data:any)=>{
+    return apiCLient.post('api/post-customers',data)
 }
 
-export const putCustomer = ()=>{
-    return apiCLient.put('/put-customers')
+export const putCustomers = (data:any)=>{
+    return apiCLient.put('api/put-customers',data)
 }
 
-export const deleteCustomer = ()=>{
-    return apiCLient.delete('/delete-customers')
+export const deleteCustomers = (data:any)=>{
+    return apiCLient.delete('api/delete-customers',data)
 }
