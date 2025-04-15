@@ -38,21 +38,21 @@ const columns: TableColumnsType<DataType> = [
     title: 'Active',
     dataIndex: 'active',
   },
-   {
-      title: "Action",
-      render: (record) => (
-        <div className="flex gap-2">
-          <Button><CiEdit /> Edit</Button>
-          <Button><MdDeleteOutline /> Delete</Button>
-        </div>
-      )
-    }
+  {
+    title: "Action",
+    render: (record) => (
+      <div className="flex gap-2">
+        <Button><CiEdit /> Edit</Button>
+        <Button><MdDeleteOutline /> Delete</Button>
+      </div>
+    )
+  }
 ];
 
 
 
 function Stores() {
-  const {data,isLoading,refetch,error}=useQuery("getStores",getstores)
+  const { data, isLoading, refetch, error } = useQuery("getStores", getstores)
   const [addModal, setAddModal] = useState(false)
   const [updateStores, setUpdateStores] = useState(false)
   const [DeleteStores, setDeleteStores] = useState(false)
@@ -83,13 +83,13 @@ function Stores() {
       <div className="w-full flex justify-end">
         <Button type='primary' onClick={() => setAddModal(true)}>Add</Button>
       </div>
-      <Table 
-      columns={columns} 
-      dataSource={data?.data} 
-      loading = {isLoading}
-      size="middle" />
+      <Table
+        columns={columns}
+        dataSource={data?.data}
+        loading={isLoading}
+        size="middle" />
 
-  <Modal
+      <Modal
         title="Add Stores"
         open={addModal}
         onCancel={() => setAddModal(false)}
@@ -112,13 +112,13 @@ function Stores() {
             <Input placeholder='email' />
           </Form.Item>
           <Form.Item
-  name="active"
-  label="Active"
-  valuePropName="checked"
-  rules={[{ required: true, message: "Please indicate if active" }]}
->
-  <Switch />
-</Form.Item>
+            name="active"
+            label="Active"
+            valuePropName="checked"
+            rules={[{ required: true, message: "Please indicate if active" }]}
+          >
+            <Switch />
+          </Form.Item>
 
           <Form.Item>
             <Button htmlType='submit' className='w-full '>Submit</Button>

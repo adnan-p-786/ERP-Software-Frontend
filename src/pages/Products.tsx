@@ -30,7 +30,7 @@ const data: DataType[] = [
 function Products() {
   return (
     <div>
-      <Divider>Users Table</Divider>
+      <Divider>Products</Divider>
       <Table<DataType> columns={columns} dataSource={data} size="middle" />
     </div>
   )

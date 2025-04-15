@@ -1,6 +1,5 @@
 import { useMutation } from "react-query"
-import { deleteVendors, getVendors, postVendors } from "./vendorApi"
-import { putRacks } from "../racks/racksApi"
+import { deleteVendors, getVendors, postVendors, putVendors } from "./vendorApi"
 
 
 export const useCreateVendors = () => {
@@ -12,7 +11,7 @@ export const usegetVendors = () => {
 }
 
 export const useUpdateVendors = () => {
-    return useMutation((data: any) => putRacks(data))
+    return useMutation((data: any) => putVendors(data))
 }
 
 export const useDeleteVendors = () => {

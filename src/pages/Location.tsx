@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { Button, Divider, Form, Input, message, Modal, Table } from 'antd';
+import { Button, Divider, Form, Input, message, Modal, Select, Table } from 'antd';
 import type { TableColumnsType } from 'antd';
 import { useQuery } from 'react-query';
 import { getLocation } from '../apis/location/locationApi';
 import { useCreatelocation } from '../apis/location/locationHooks';
 import { CiEdit } from 'react-icons/ci';
 import { MdDeleteOutline } from 'react-icons/md';
+import { getWarehouse } from '../apis/warehouse/warehouseApi';
 
 interface DataType {
   key: React.Key;
@@ -35,9 +36,11 @@ const columns: TableColumnsType<DataType> = [
     dataIndex: 'zipcode',
   },
   {
-    title: 'WarehouseId',
-    dataIndex: 'warehouseId',
+    title: 'Warehouse Name',
+    dataIndex: ['warehouseId', 'name'],
+    key: 'warehouseName',
   },
+  
   {
     title: "Action",
     render: (record) => (
@@ -52,7 +55,7 @@ const columns: TableColumnsType<DataType> = [
 
 
 function Location() {
-
+ const {data:warehouseData} = useQuery("getwarehouse",getWarehouse)
   const {data,isLoading,error,refetch} = useQuery("getLocation",(getLocation))
   const [addModal, setAddModal] = useState(false)
   const [updateLocation, setUpdateLocation] = useState(false)
@@ -114,8 +117,14 @@ function Location() {
           <Form.Item name={'zipcode'} label="Zipcode" rules={[{ required: true, message: "please enter Zipcode" }]}>
             <Input placeholder='zipcode' />
           </Form.Item>
-          <Form.Item name={'warehouseId'} label="Warehouse Id" rules={[{ required: true, message: "please enter WarehouseId" }]}>
-            <Input placeholder='warehouseId' />
+          <Form.Item name='warehouseId' label="Warehouse" rules={[{ required: true, message: "Please select Warehouse" }]}>
+            <Select placeholder="Select Warehouse">
+              {warehouseData?.data?.map((wh: any) => (
+                <Select.Option key={wh._id} value={wh._id}>
+                  {wh.name}
+                </Select.Option>
+              ))}
+            </Select>
           </Form.Item>
           <Form.Item>
             <Button htmlType='submit' className='w-full '>Submit</Button>
