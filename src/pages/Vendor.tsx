@@ -48,8 +48,8 @@ const columns: TableColumnsType<DataType> = [
 function Vendor() {
   const { data, isLoading, error, refetch } = useQuery("getVendors", getVendors)
   const [addModal, setAddModal] = useState(false)
-  const [updateVendors, setUpdateVendors] = useState(false)
-  const [DeleteVendors, setDeleteVendors] = useState(false)
+  // const [updateVendors, setUpdateVendors] = useState(false)
+  // const [DeleteVendors, setDeleteVendors] = useState(false)
   const { mutate: Create } = useCreateVendors()
 
   const [form] = Form.useForm()
