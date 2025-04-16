@@ -30,7 +30,7 @@ const columns: TableColumnsType<DataType> = [
   {
     title: 'vendor Id',
     dataIndex: 'vendorsId',
-    render: (customer: any) => customer?._id || 'N/A',
+    render: (vendors: any) => vendors?._id || 'N/A',
   },
   {
     title: "Action",
@@ -74,7 +74,7 @@ function VendorAccount() {
 
   return (
     <div>
-      <Divider>Users Table</Divider>
+      <Divider>Vendors Account</Divider>
        <div className="w-full flex justify-end">
           <Button type='primary' onClick={() => setAddModal(true)}>Add</Button>
         </div>

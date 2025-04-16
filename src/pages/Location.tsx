@@ -36,11 +36,10 @@ const columns: TableColumnsType<DataType> = [
     dataIndex: 'zipcode',
   },
   {
-    title: 'Warehouse Name',
-    dataIndex: ['warehouseId', 'name'],
-    key: 'warehouseName',
+    title: 'Warehouse ID',
+    dataIndex: 'warehouseId',
+    render: (warehouse: any) => warehouse?._id || 'N/A',
   },
-  
   {
     title: "Action",
     render: (record) => (
@@ -55,8 +54,8 @@ const columns: TableColumnsType<DataType> = [
 
 
 function Location() {
- const {data:warehouseData} = useQuery("getwarehouse",getWarehouse)
-  const {data,isLoading,error,refetch} = useQuery("getLocation",(getLocation))
+  const { data: warehouseData, isLoading:warehouseloading } = useQuery("getwarehouse", getWarehouse)
+  const { data, isLoading, error, refetch } = useQuery("getLocation", (getLocation))
   const [addModal, setAddModal] = useState(false)
   const [updateLocation, setUpdateLocation] = useState(false)
   const [DeleteLocation, setDeleteLocation] = useState(false)
@@ -70,18 +69,18 @@ function Location() {
 
 
   const onFinish = (value: any) => {
-      Create(value, {
-        onSuccess() {
-          message.success("add successfully")
-          refetch()
-          setAddModal(false)
-          form.resetFields()
-        },
-        onError() {
-          message.error("faild")
-        }
-      })
-    }
+    Create(value, {
+      onSuccess() {
+        message.success("add successfully")
+        refetch()
+        setAddModal(false)
+        form.resetFields()
+      },
+      onError() {
+        message.error("faild")
+      }
+    })
+  }
 
   return (
     <div>
@@ -89,13 +88,13 @@ function Location() {
       <div className="w-full flex justify-end">
         <Button type='primary' onClick={() => setAddModal(true)}>Add</Button>
       </div>
-      <Table 
-      columns={columns} 
-      dataSource={data?.data} 
-      loading = {isLoading}
-      size="middle" />
+      <Table
+        columns={columns}
+        dataSource={data?.data}
+        loading={isLoading}
+        size="middle" />
 
-   <Modal
+      <Modal
         title="Add Location"
         open={addModal}
         onCancel={() => setAddModal(false)}
@@ -117,14 +116,20 @@ function Location() {
           <Form.Item name={'zipcode'} label="Zipcode" rules={[{ required: true, message: "please enter Zipcode" }]}>
             <Input placeholder='zipcode' />
           </Form.Item>
-          <Form.Item name='warehouseId' label="Warehouse" rules={[{ required: true, message: "Please select Warehouse" }]}>
-            <Select placeholder="Select Warehouse">
-              {warehouseData?.data?.map((wh: any) => (
-                <Select.Option key={wh._id} value={wh._id}>
-                  {wh.name}
-                </Select.Option>
-              ))}
-            </Select>
+          <Form.Item
+            name={'expenseTypeId'}
+            label="expenseType"
+            rules={[{ required: true, message: "Please select a ExpenseType" }]}
+          >
+            <Select
+              placeholder="Select a ExpenseType"
+              options={
+                !warehouseloading && warehouseData?.data?.map((wh: { _id: string; name: string }) => ({
+                  value: wh._id,
+                  label: wh.name
+                }))
+              }
+            />
           </Form.Item>
           <Form.Item>
             <Button htmlType='submit' className='w-full '>Submit</Button>

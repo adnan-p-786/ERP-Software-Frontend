@@ -19,7 +19,6 @@ function Departments() {
   const [currentDepartment, setUpdateDepartment] = useState<any>(null);
   const {mutate:Create} = useCreateDepartment()
   const {mutate:Update} = useUpdateDepartment()
-  // const {mutate:Delete} = useDeleteDepartment()
   const [form] = Form.useForm()
   if (error) {
     return message.error("data fetching error")

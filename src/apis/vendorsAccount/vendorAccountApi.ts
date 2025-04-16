@@ -5,13 +5,13 @@ export const getVendorsAccount = ()=>{
 }
 
 export const postVendorsAccount =(data:any)=>{
-    return apiCLient.post('/api/post-vendorsAccounts',data)
+    return apiCLient.post('/api/post-vendorAccounts',data)
 }
 
 export const putVendorsAccount = (data:any)=>{
-    return apiCLient.put('/api/put-vendorsAccounts',data)
+    return apiCLient.put('/api/put-vendorAccounts',data)
 }
 
 export const deleteVendorsAccount = (data:any)=>{
-    return apiCLient.put('/api/delete-vendorsAccounts',data)
+    return apiCLient.delete('/api/delete-vendorAccounts',data)
 }
