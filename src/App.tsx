@@ -23,7 +23,7 @@ function App() {
   return (
     <>
       <Layout className='h-screen'>
-      <Sider trigger={null} collapsible collapsed={collapsed}>
+      <Sider className='overflow-y-scroll sidebarHidden' trigger={null} collapsible collapsed={collapsed}>
         <div className="demo-logo-vertical" />
         <Menu
           theme="dark"

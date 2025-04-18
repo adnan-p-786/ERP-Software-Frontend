@@ -2,9 +2,6 @@ import { useMutation } from "react-query"
 import { deleteRacks, getRacks, postRacks, putRacks } from "./racksApi"
 
 
-
-
-
 export const useCreateRacks = () => {
     return useMutation((data: any) => postRacks(data))
 }
