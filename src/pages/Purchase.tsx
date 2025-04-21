@@ -6,6 +6,9 @@ import { MdDeleteOutline } from 'react-icons/md';
 import { useQuery } from 'react-query';
 import { getPurchase } from '../apis/purchase/purchaseApi';
 import { useCreatePurchase } from '../apis/purchase/purchaseHooks';
+import { getVendors } from '../apis/vendorss/vendorApi';
+import { getstores } from '../apis/storess/storesApi';
+import { getWarehouse } from '../apis/warehouse/warehouseApi';
 
 interface DataType {
   key: React.Key;
@@ -56,6 +59,9 @@ const columns: TableColumnsType<DataType> = [
 
 function Purchase() {
   const { data, isLoading, error, refetch } = useQuery("getPurchase",getPurchase)
+  const {data:vendorsdata , isLoading:vendorsloading} = useQuery("getVendors",getVendors)
+  const {data:storesdata , isLoading:storesloading} = useQuery("getStores",getstores)
+  const {data:warehousedata , isLoading:warehouseloading} = useQuery("getWarehouse",getWarehouse)
   const [addModal, setAddModal] = useState(false)
   const { mutate: Create } = useCreatePurchase()
 
@@ -102,26 +108,56 @@ function Purchase() {
           <Form.Item name={'billNo'} label="Bill No" rules={[{ required: true, message: "please enter Name" }]}>
             <Input placeholder='billNo' />
           </Form.Item>
-          {/* <Form.Item
-            name={'subCategoriesId'}
-            label="Sub Category"
-            rules={[{ required: true, message: "Please select a Subcategory" }]}
+          <Form.Item
+            name={'vendorId'}
+            label="Vendors ID"
+            rules={[{ required: true, message: "Please select a vendor" }]}
           >
             <Select
-              placeholder="Select a Sub Category"
+              placeholder="Select a Vendor"
               options={
-                !SubCategoriesloading && SubCategoriesdata?.data.map((subcat: { _id: string; name: string }) => ({
+                !vendorsloading && vendorsdata?.data.map((subcat: { _id: string; name: string }) => ({
                   value: subcat._id,
                   label: subcat.name
                 }))
               }
             />
-          </Form.Item> */}
-          <Form.Item name={'quantityAlert'} label="Quantity Alert" rules={[{ required: true, message: "please enter VAT" }]}>
-            <Input placeholder='quantityAlert' />
           </Form.Item>
-          <Form.Item name={'vat'} label="VAT" rules={[{ required: true, message: "please enter VAT" }]}>
-            <Input placeholder='vat' />
+          <Form.Item
+            name={'storedId'}
+            label="Stores ID"
+            rules={[{ required: true, message: "Please select a store" }]}
+          >
+            <Select
+              placeholder="Select a Stores"
+              options={
+                !storesloading && storesdata?.data.map((subcat: { _id: string; name: string }) => ({
+                  value: subcat._id,
+                  label: subcat.name
+                }))
+              }
+            />
+          </Form.Item>
+          <Form.Item
+            name={'warehouseId'}
+            label="warehouse ID"
+            rules={[{ required: true, message: "Please select a Warehouse" }]}
+          >
+            <Select
+              placeholder="Select a Warehouse"
+              options={
+                !warehouseloading && warehousedata?.data.map((subcat: { _id: string; name: string }) => ({
+                  value: subcat._id,
+                  label: subcat.name
+                }))
+              }
+            />
+          </Form.Item>
+          <Form.Item name={'totalAmount'} label="Total Amount" rules={[{ required: true, message: "please enter VAT" }]}>
+            <Input placeholder='totalAmount' />
+          </Form.Item>
+          <Form.Item name={'otherExpense'} label="Other Expenses" rules={[{ required: true, message: "please enter VAT" }]}>
+            <Input placeholder='otherExpense' />
           </Form.Item>
           <Form.Item>
             <Button htmlType='submit' className='w-full '>Submit</Button>
