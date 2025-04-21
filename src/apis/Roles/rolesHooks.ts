@@ -1,18 +1,18 @@
 import { useMutation } from "react-query"
 import { deleteRoles, getRoles, postRoles, putRoles } from "./rolesApi"
 
-export const useCreateStores = () => {
+export const useCreateRoles = () => {
     return useMutation((data: any) => postRoles(data))
 }
 
-export const usegetStores = () => {
+export const usegetRoles = () => {
     return useMutation(() => getRoles())
 }
 
-export const useUpdateStores = () => {
+export const useUpdateRoles = () => {
     return useMutation((data: any) => putRoles(data))
 }
 
-export const useDeleteStores = () => {
+export const useDeleteRoles = () => {
     return useMutation((data: any) => deleteRoles(data))
 }

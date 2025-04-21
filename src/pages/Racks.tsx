@@ -35,7 +35,7 @@ const columns: TableColumnsType<DataType> = [
 
 
 function Racks() {
-  const {data,isLoading,error,refetch} = useQuery("getCategoryies",getRacks)
+  const {data,isLoading,error,refetch} = useQuery("getRacks",getRacks)
   const [addModal,setAddModal] = useState(false)
   const [updateRacks,setUpdateRacks] = useState(false)
   const [DeleteRacks,setDeleteRacks] = useState(false)
@@ -66,7 +66,7 @@ const onFinish = (value:any)=>{
     <div>
       <Divider>Racks</Divider>
       <div className="w-full flex justify-end">
-              <Button type='primary' onClick={()=>setAddModal(true)}>Add</Button>
+         <Button type='primary' onClick={()=>setAddModal(true)}>Add</Button>
       </div>
       <Table
         columns={columns}
@@ -75,7 +75,7 @@ const onFinish = (value:any)=>{
         size="middle" />
 
 <Modal
-        title="Add Category"
+        title="Add Racks"
         open={addModal}
         onCancel={() => setAddModal(false)}
         footer={null}
