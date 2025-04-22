@@ -3,11 +3,11 @@ import { apiCLient } from "../ApiCLient"
 
 
 export const getLocation = ()=>{
-    return apiCLient.get('api/get-location')
+    return apiCLient.get('/api/get-location')
 }
 
 export const postLocation = (data:any)=>{
-    return apiCLient.get('api/post-location',data)
+    return apiCLient.post('/api/post-location',data)
 }
 
 export const putLocation = (data:any)=>{
@@ -15,5 +15,5 @@ export const putLocation = (data:any)=>{
 }
 
 export const deleteLocation = (data:any)=>{
-    return apiCLient.put('/api/delete-location',data)
+    return apiCLient.delete('/api/delete-location',data)
 }

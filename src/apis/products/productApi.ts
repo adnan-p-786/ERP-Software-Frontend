@@ -13,5 +13,5 @@ export const putProduct = (data:any)=>{
 }
 
 export const deleteProduct = (data:any)=>{
-    return apiCLient.put('/api/delete-product',data)
+    return apiCLient.delete('/api/delete-product',data)
 }

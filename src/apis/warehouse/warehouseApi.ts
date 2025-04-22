@@ -14,5 +14,5 @@ export const putWarehouse = (data:any)=>{
 }
 
 export const deleteWarehouse = (data:any)=>{
-    return apiCLient.put('/api/delete-warehouse',data)
+    return apiCLient.delete('/api/delete-warehouse',data)
 }

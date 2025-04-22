@@ -7,6 +7,10 @@ import { useCreateStocks } from '../apis/stock/stockHooks';
 import { useQuery } from 'react-query';
 import { getStocks } from '../apis/stock/stockApi';
 import { getProduct } from '../apis/products/productApi';
+import { getUnits } from '../apis/units/unitsApi';
+import { getstores } from '../apis/storess/storesApi';
+import { getWarehouse } from '../apis/warehouse/warehouseApi';
+import { getVendors } from '../apis/vendorss/vendorApi';
 
 interface DataType {
   key: React.Key;
@@ -74,6 +78,10 @@ const columns: TableColumnsType<DataType> = [
 
 function Stock() {
   const { data: productdata, isLoading: productloading } = useQuery('getproduct', getProduct)
+  const { data: unitdata, isLoading: unitloading } = useQuery('getUnits', getUnits)
+  const { data: storedata, isLoading: storeloading } = useQuery('getStores', getstores)
+  const { data: warehousedata, isLoading: warehouseloading } = useQuery('getWarehouse', getWarehouse)
+  const { data: vendordata, isLoading: vendorloading } = useQuery('getVendor', getVendors)
   const { data, isLoading, error, refetch } = useQuery("getStocks", getStocks)
   const [addModal, setAddModal] = useState(false)
   const { mutate: Create } = useCreateStocks()
@@ -123,7 +131,7 @@ function Stock() {
             rules={[{ required: true, message: "Please select a product" }]}
           >
             <Select
-              placeholder="Select a Category"
+              placeholder="Select a product"
               options={
                 !productloading && productdata?.data.map((cat: { _id: string; name: string }) => ({
                   value: cat._id,
@@ -132,8 +140,80 @@ function Stock() {
               }
             />
           </Form.Item>
-          <Form.Item name={'name'} label="Name" rules={[{ required: true, message: "please enter Name" }]}>
-            <Input placeholder='name' />
+          <Form.Item
+            name={'unitId'}
+            label="Unit"
+            rules={[{ required: true, message: "Please select a Unit" }]}
+          >
+            <Select
+              placeholder="Select a Unit"
+              options={
+                !unitloading && unitdata?.data.map((cat: { _id: string; name: string }) => ({
+                  value: cat._id,
+                  label: cat.name
+                }))
+              }
+            />
+          </Form.Item>
+          <Form.Item name={'quantity'} label="Quantity" rules={[{ required: true, message: "please enter Quantity" }]}>
+            <Input placeholder='Quantity' />
+          </Form.Item>
+          <Form.Item name={'purchase_price'} label="Purchase Price" rules={[{ required: true, message: "please enter Quantity" }]}>
+            <Input placeholder='Purchase Price' />
+          </Form.Item>
+          <Form.Item name={'selling_price'} label="Selling Price" rules={[{ required: true, message: "please enter Quantity" }]}>
+            <Input placeholder='Selling Price' />
+          </Form.Item>
+          <Form.Item name={'barcode'} label="Barcode" rules={[{ required: true, message: "please enter Quantity" }]}>
+            <Input placeholder='Barcode' />
+          </Form.Item>
+          <Form.Item
+            name={'storeId'}
+            label="Store"
+            rules={[{ required: true, message: "Please select a Store" }]}
+          >
+            <Select
+              placeholder="Select a Store"
+              options={
+                !storeloading && storedata?.data.map((cat: { _id: string; name: string }) => ({
+                  value: cat._id,
+                  label: cat.name
+                }))
+              }
+            />
+          </Form.Item>
+          <Form.Item
+            name={'warehouseId'}
+            label="Warehouse"
+            rules={[{ required: true, message: "Please select a Warehouse" }]}
+          >
+            <Select
+              placeholder="Select a Warehouse"
+              options={
+                !warehouseloading && warehousedata?.data.map((cat: { _id: string; name: string }) => ({
+                  value: cat._id,
+                  label: cat.name
+                }))
+              }
+            />
+          </Form.Item>
+          <Form.Item
+            name={'vendorId'}
+            label="Vendor"
+            rules={[{ required: true, message: "Please select a Vendor" }]}
+          >
+            <Select
+              placeholder="Select a Vendor"
+              options={
+                !vendorloading && vendordata?.data.map((cat: { _id: string; name: string }) => ({
+                  value: cat._id,
+                  label: cat.name
+                }))
+              }
+            />
+          </Form.Item>
+          <Form.Item name={'billNo'} label="Bill No" rules={[{ required: true, message: "please enter Quantity" }]}>
+            <Input placeholder='Bill No' />
           </Form.Item>
           <Form.Item>
             <Button htmlType='submit' className='w-full '>Submit</Button>

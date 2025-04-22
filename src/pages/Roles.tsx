@@ -58,6 +58,23 @@ const privilegeOptions = [
   { value: "Purchase", label: "Purchase" },
   { value: "Sales", label: "Sales" },
   { value: "Stocks", label: "Stocks" },
+  { value: "Racks", label: "Racks" },
+  { value: "Categories", label: "Categories" },
+  { value: "SubCategories", label: "SubCategories" },
+  { value: "Brand", label: "Brand" },
+  { value: "Unit", label: "Unit" },
+  { value: "Purchase Items", label: "Purchase Items" },
+  { value: "Accounts", label: "Accounts" },
+  { value: "Sales Items", label: "Sales Items" },
+  { value: "Discounts", label: "Discounts" },
+  { value: "Expense", label: "Expense" },
+  { value: "Expense Type", label: "Expense Type" },
+  { value: "Customer", label: "Customer" },
+  { value: "Customer Account", label: "Customer Account" },
+  { value: "Vendor", label: "Vendor" },
+  { value: "Vendor Account", label: "Vendor Account" },
+  { value: "Warehouse", label: "Warehouse" },
+  { value: "Location", label: "Location" },
 ];
 
 function Roles() {

@@ -35,10 +35,6 @@ const columns: TableColumnsType<DataType> = [
     dataIndex: 'email',
   },
   {
-    title: 'Active',
-    dataIndex: 'active',
-  },
-  {
     title: "Action",
     render: (record) => (
       <div className="flex gap-2">

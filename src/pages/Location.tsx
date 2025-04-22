@@ -117,12 +117,12 @@ function Location() {
             <Input placeholder='zipcode' />
           </Form.Item>
           <Form.Item
-            name={'expenseTypeId'}
-            label="expenseType"
-            rules={[{ required: true, message: "Please select a ExpenseType" }]}
+            name={'warehouseId'}
+            label="Warehouse"
+            rules={[{ required: true, message: "Please select a Warehouse" }]}
           >
             <Select
-              placeholder="Select a ExpenseType"
+              placeholder="Select a Warehouse"
               options={
                 !warehouseloading && warehouseData?.data?.map((wh: { _id: string; name: string }) => ({
                   value: wh._id,
