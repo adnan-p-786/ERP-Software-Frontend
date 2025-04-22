@@ -42,9 +42,6 @@ function App() {
             <Link to= '/Roles'>Roles</Link>
             </Menu.Item>
             <Menu.Item>
-            <Link to= '/Privileges'>Privileges</Link>
-            </Menu.Item>
-            <Menu.Item>
             <Link to= '/Departments'>Departments</Link> 
             </Menu.Item>
           </SubMenu>

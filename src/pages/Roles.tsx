@@ -51,9 +51,13 @@ const columns: TableColumnsType<DataType> = [
 ];
 
 const privilegeOptions = [
-  { value: "users", label: "Users" },
-  { value: "projects", label: "Projects" },
-  { value: "settings", label: "Settings" },
+  { value: "Customer Accounts", label: "Customer Accounts" },
+  { value: "Vendor Accounts", label: "Vendor Accounts" },
+  { value: "Stores", label: "Stores" },
+  { value: "Products", label: "Products" },
+  { value: "Purchase", label: "Purchase" },
+  { value: "Sales", label: "Sales" },
+  { value: "Stocks", label: "Stocks" },
 ];
 
 function Roles() {
@@ -95,7 +99,7 @@ function Roles() {
     <div>
       <Divider>Roles</Divider>
       <div className="w-full flex justify-end mb-4">
-        <Button type='primary' onClick={() => setAddModal(true)}>Add Role</Button>
+        <Button type='primary' onClick={() => setAddModal(true)}>Add</Button>
       </div>
       <Table
         columns={columns}

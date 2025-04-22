@@ -6,7 +6,6 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Dashboard from './pages/Dashboard.tsx'
 import Users from './pages/Users.tsx'
 import Roles from './pages/Roles.tsx'
-import Privileges from './pages/Privileges.tsx'
 import Departments from './pages/Departments.tsx'
 import Products from './pages/Products.tsx'
 import Racks from './pages/Racks.tsx'
@@ -50,10 +49,6 @@ const router = createBrowserRouter([
       {
         path:'/Roles',
         element: <Roles/>
-      },
-      {
-        path:'/Privileges',
-        element: <Privileges/>
       },
       {
         path:'/Departments',
