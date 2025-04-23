@@ -1,13 +1,9 @@
 import { useMutation } from "react-query"
-import { deleteCustomerAccounts, getCustomerAccounts, postCustomerAccounts, putCustomerAccounts } from "./customerAccountApi"
+import { deleteCustomerAccounts, postCustomerAccounts, putCustomerAccounts } from "./customerAccountApi"
 
 
 export const useCreateCustomerAccounts = () => {
     return useMutation((data: any) => postCustomerAccounts(data))
-}
-
-export const useGetCustomerAccounts = () => {
-    return useMutation(() => getCustomerAccounts())
 }
 
 export const useUpdateCustomerAccounts = () => {

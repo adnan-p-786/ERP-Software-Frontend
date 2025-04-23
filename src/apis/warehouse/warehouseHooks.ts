@@ -1,13 +1,9 @@
 import { useMutation } from "react-query"
-import { deleteWarehouse, getWarehouse, postWarehouse, putWarehouse } from "./warehouseApi"
+import { deleteWarehouse, postWarehouse, putWarehouse } from "./warehouseApi"
 
 
 export const useCreateWarehouse = () => {
     return useMutation((data: any) => postWarehouse(data))
-}
-
-export const usegetWarehouse = () => {
-    return useMutation(() => getWarehouse())
 }
 
 export const useUpdateWarehouse = () => {

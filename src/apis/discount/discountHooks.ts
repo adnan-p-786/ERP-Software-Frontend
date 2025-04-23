@@ -1,12 +1,8 @@
 import { useMutation } from "react-query"
-import { deleteDiscount, getDiscount, postDiscount, putDiscount } from "./discountApi"
+import { deleteDiscount, postDiscount, putDiscount } from "./discountApi"
 
 export const useCreateDiscount = () => {
     return useMutation((data: any) => postDiscount(data))
-}
-
-export const usegetDiscount = () => {
-    return useMutation(() => getDiscount())
 }
 
 export const useUpdateDiscount = () => {

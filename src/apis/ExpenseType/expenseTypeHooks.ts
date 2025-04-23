@@ -1,9 +1,6 @@
 import { useMutation } from "react-query"
-import { deleteExpenseType, getExpenseType, postExpenseType, putExpenseType } from "./expenseTypeApi"
+import { deleteExpenseType, postExpenseType, putExpenseType } from "./expenseTypeApi"
 
-export const useGetExpenseType = ()=>{
-    return useMutation(()=> getExpenseType())
-}
 
 export const useCreateExpenseType = () => {
     return useMutation((data: any) => postExpenseType(data))

@@ -1,10 +1,6 @@
 import { useMutation } from "react-query"
-import { deleteLocation, getLocation, postLocation, putLocation } from "./locationApi"
+import { deleteLocation, postLocation, putLocation } from "./locationApi"
 
-
-export const useGetlocation = ()=>{
-    return useMutation(()=> getLocation())
-}
 
 export const useCreatelocation = () => {
     return useMutation((data: any) => postLocation(data))

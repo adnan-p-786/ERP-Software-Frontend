@@ -1,6 +1,7 @@
 import { useMutation } from "react-query"
 import { deleteProduct, postProduct, putProduct } from "./productApi"
 
+
 export const useCreateProduct = () => {
     return useMutation((data: any) => postProduct(data))
 }

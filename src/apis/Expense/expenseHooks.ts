@@ -1,9 +1,6 @@
 import { useMutation } from "react-query"
-import { deleteExpense, getExpense, postExpense, putExpense } from "./expenseApi"
+import { deleteExpense, postExpense, putExpense } from "./expenseApi"
 
-export const useGetExpense = ()=>{
-    return useMutation(()=> getExpense())
-}
 
 export const useCreateExpense = () => {
     return useMutation((data: any) => postExpense(data))
