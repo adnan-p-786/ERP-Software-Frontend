@@ -30,6 +30,7 @@ import Stores from './pages/Stores.tsx'
 import Warehouse from './pages/Warehouse.tsx'
 import Location from './pages/Location.tsx'
 import { QueryClient, QueryClientProvider } from 'react-query'
+import OtherExpenses from './pages/OtherExpenses.tsx'
 
 
 
@@ -113,6 +114,10 @@ const router = createBrowserRouter([
       {
         path:'/ExpenseType',
         element: <ExpenseType/>
+      },
+      {
+        path:'/OtherExpenses',
+        element: <OtherExpenses/>
       },
       {
         path:'/Customer',

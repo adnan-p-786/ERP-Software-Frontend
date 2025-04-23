@@ -101,6 +101,9 @@ function App() {
             <Menu.Item>
             <Link to= '/ExpenseType'>Expense Type</Link>
             </Menu.Item>
+            <Menu.Item>
+            <Link to= '/OtherExpenses'>Other Expenses</Link>
+            </Menu.Item>
           </SubMenu>
 
         
