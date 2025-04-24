@@ -9,7 +9,6 @@ import { useCreatePurchase } from '../apis/purchase/purchaseHooks';
 import { getVendors } from '../apis/vendorss/vendorApi';
 import { getstores } from '../apis/storess/storesApi';
 import { getWarehouse } from '../apis/warehouse/warehouseApi';
-import { getOtherExpenses } from '../apis/otherExpenses/otherExpenseApi';
 
 interface DataType {
   key: React.Key;
@@ -42,11 +41,6 @@ const columns: TableColumnsType<DataType> = [
     dataIndex: 'totalAmount',
   },
   {
-    title: 'Other Expenses',
-    dataIndex: 'otherExpense',
-    render: (otherexp: any) => otherexp?._id || 'N/A',
-  },
-  {
     title: "Action",
     render: (record) => (
       <div className="flex gap-2">
@@ -62,7 +56,6 @@ const columns: TableColumnsType<DataType> = [
 function Purchase() {
   const { data, isLoading, error, refetch } = useQuery("getPurchase",getPurchase)
   const {data:vendorsdata , isLoading:vendorsloading} = useQuery("getVendors",getVendors)
-  const {data:otherexpdata , isLoading:otherexploading} = useQuery("getOtherExpense",getOtherExpenses)
   const {data:storesdata , isLoading:storesloading} = useQuery("getStores",getstores)
   const {data:warehousedata , isLoading:warehouseloading} = useQuery("getWarehouse",getWarehouse)
   const [addModal, setAddModal] = useState(false)
@@ -158,21 +151,6 @@ function Purchase() {
           </Form.Item>
           <Form.Item name={'totalAmount'} label="Total Amount" rules={[{ required: true, message: "please enter VAT" }]}>
             <Input placeholder='totalAmount' />
-          </Form.Item>
-          <Form.Item
-            name={'otherExpense'}
-            label="OtherExpense ID"
-            rules={[{ required: true, message: "Please select a Other Expense" }]}
-          >
-            <Select
-              placeholder="Select a Other Expense"
-              options={
-                !otherexploading && otherexpdata?.data.map((subcat: { _id: string; name: string }) => ({
-                  value: subcat._id,
-                  label: subcat.name
-                }))
-              }
-            />
           </Form.Item>
           <Form.Item>
             <Button htmlType='submit' className='w-full '>Submit</Button>

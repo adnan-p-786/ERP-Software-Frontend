@@ -19,10 +19,6 @@ const columns: TableColumnsType<DataType> = [
     dataIndex: 'name',
   },
   {
-    title: 'Amount',
-    dataIndex: 'amount',
-  },
-  {
     title: "Action",
     render: (record) => (
       <div className="flex gap-2">
@@ -71,6 +67,7 @@ function OtherExpenses() {
       <Table 
       columns={columns} 
       dataSource={data?.data} 
+      loading={isLoading}
       size="middle" />
 
 <Modal
@@ -82,9 +79,6 @@ function OtherExpenses() {
         <Form layout='vertical' onFinish={onFinish} form={form}>
           <Form.Item name={'name'} label="Name" rules={[{ required: true, message: "please enter Name" }]}>
             <Input placeholder='Name' />
-          </Form.Item>
-          <Form.Item name={'amount'} label="Amount" rules={[{ required: true, message: "please enter Amount" }]}>
-            <Input placeholder='Amount' />
           </Form.Item>
           <Form.Item>
             <Button htmlType='submit' className='w-full '>Submit</Button>
