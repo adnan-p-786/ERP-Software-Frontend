@@ -41,6 +41,11 @@ const columns: TableColumnsType<DataType> = [
     dataIndex: 'totalAmount',
   },
   {
+    title: 'Purchase ID',
+    dataIndex: 'purchaseId',
+    render: (purchase: any) => purchase?._id || 'N/A',
+  },
+  {
     title: "Action",
     render: (record) => (
       <div className="flex gap-2">
@@ -48,16 +53,16 @@ const columns: TableColumnsType<DataType> = [
         <Button><MdDeleteOutline /> Delete</Button>
       </div>
     )
-   }
+  }
 ];
 
 
 
 function Purchase() {
-  const { data, isLoading, error, refetch } = useQuery("getPurchase",getPurchase)
-  const {data:vendorsdata , isLoading:vendorsloading} = useQuery("getVendors",getVendors)
-  const {data:storesdata , isLoading:storesloading} = useQuery("getStores",getstores)
-  const {data:warehousedata , isLoading:warehouseloading} = useQuery("getWarehouse",getWarehouse)
+  const { data, isLoading, error, refetch } = useQuery("getPurchase", getPurchase)
+  const { data: vendorsdata, isLoading: vendorsloading } = useQuery("getVendors", getVendors)
+  const { data: storesdata, isLoading: storesloading } = useQuery("getStores", getstores)
+  const { data: warehousedata, isLoading: warehouseloading } = useQuery("getWarehouse", getWarehouse)
   const [addModal, setAddModal] = useState(false)
   const { mutate: Create } = useCreatePurchase()
 
@@ -85,22 +90,24 @@ function Purchase() {
   return (
     <div>
       <Divider>Purchase</Divider>
-       <div className="w-full flex justify-end">
+      <div className="w-full flex justify-end">
         <Button type='primary' onClick={() => setAddModal(true)}>Add</Button>
       </div>
-      <Table 
-      columns={columns} 
-      dataSource={data?.data} 
-      loading={isLoading}
-      size="middle" />
+      <Table
+        columns={columns}
+        dataSource={data?.data}
+        loading={isLoading}
+        size="middle" />
 
-<Modal
-        title="Add purchase"
+      <Modal
+        title="Add Purchase"
         open={addModal}
         onCancel={() => setAddModal(false)}
         footer={null}
+        width={1300}
       >
-        <Form layout='vertical' onFinish={onFinish} form={form}>
+        <Form layout='vertical' onFinish={onFinish} form={form} className='
+         grid grid-flow-row grid-cols-4 gap-2'>
           <Form.Item name={'billNo'} label="Bill No" rules={[{ required: true, message: "please enter Name" }]}>
             <Input placeholder='billNo' />
           </Form.Item>
@@ -152,10 +159,26 @@ function Purchase() {
           <Form.Item name={'totalAmount'} label="Total Amount" rules={[{ required: true, message: "please enter VAT" }]}>
             <Input placeholder='totalAmount' />
           </Form.Item>
-          <Form.Item>
-            <Button htmlType='submit' className='w-full '>Submit</Button>
+          <Divider orientation="left">Purchase Items</Divider>
+          <Form.Item
+            name={'purchaseId'}
+            label="Purchase ID"
+            rules={[{ required: true, message: "Please select a PurchaseId" }]}
+          >
+            <Select
+              placeholder="Select a Purchase"
+              options={
+                !warehouseloading && warehousedata?.data.map((subcat: { _id: string; name: string }) => ({
+                  value: subcat._id,
+                  label: subcat.name
+                }))
+              }
+            />
           </Form.Item>
         </Form>
+        <Form.Item>
+          <Button htmlType='submit' className='w-full '>Submit</Button>
+        </Form.Item>
       </Modal>
     </div>
   )
