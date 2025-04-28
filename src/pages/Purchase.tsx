@@ -9,6 +9,8 @@ import { useCreatePurchase } from '../apis/purchase/purchaseHooks';
 import { getVendors } from '../apis/vendorss/vendorApi';
 import { getstores } from '../apis/storess/storesApi';
 import { getWarehouse } from '../apis/warehouse/warehouseApi';
+import { getProduct } from '../apis/products/productApi';
+import { getUnits } from '../apis/units/unitsApi';
 
 interface DataType {
   key: React.Key;
@@ -61,6 +63,8 @@ const columns: TableColumnsType<DataType> = [
 function Purchase() {
   const { data, isLoading, error, refetch } = useQuery("getPurchase", getPurchase)
   const { data: vendorsdata, isLoading: vendorsloading } = useQuery("getVendors", getVendors)
+  const { data: productdata, isLoading: productloading } = useQuery("getProduct", getProduct)
+  const { data: unitdata, isLoading: unitloading } = useQuery("getUnits", getUnits)
   const { data: storesdata, isLoading: storesloading } = useQuery("getStores", getstores)
   const { data: warehousedata, isLoading: warehouseloading } = useQuery("getWarehouse", getWarehouse)
   const [addModal, setAddModal] = useState(false)
@@ -104,7 +108,7 @@ function Purchase() {
         open={addModal}
         onCancel={() => setAddModal(false)}
         footer={null}
-        width={1300}
+        width={1200}
       >
         <Form layout='vertical' onFinish={onFinish} form={form} className='
          grid grid-flow-row grid-cols-4 gap-2'>
@@ -161,24 +165,46 @@ function Purchase() {
           </Form.Item>
           <Divider orientation="left">Purchase Items</Divider>
           <Form.Item
-            name={'purchaseId'}
-            label="Purchase ID"
-            rules={[{ required: true, message: "Please select a PurchaseId" }]}
+            name={'productId'}
+            label="product ID"
+            rules={[{ required: true, message: "Please select a Product ID" }]}
           >
             <Select
-              placeholder="Select a Purchase"
+              placeholder="Select a Product"
               options={
-                !warehouseloading && warehousedata?.data.map((subcat: { _id: string; name: string }) => ({
-                  value: subcat._id,
-                  label: subcat.name
+                !productloading && productdata?.data.map((product: { _id: string; }) => ({
+                  value: product._id
                 }))
               }
             />
           </Form.Item>
-        </Form>
-        <Form.Item>
+          <Form.Item
+            name={'unitId'}
+            label="Unit ID"
+            rules={[{ required: true, message: "Please select a Unit ID" }]}
+          >
+            <Select
+              placeholder="Select a Unit"
+              options={
+                !unitloading && unitdata?.data.map((Unit: { _id: string; }) => ({
+                  value: Unit._id
+                }))
+              }
+            />
+          </Form.Item>
+          <Form.Item name={'quantity'} label="Quantity" rules={[{ required: true, message: "please enter Quantity" }]}>
+            <Input placeholder='Quantity' />
+          </Form.Item>
+          <Form.Item name={'purchasePrice'} label="Purchase Price" rules={[{ required: true, message: "please enter Purchase Price" }]}>
+            <Input placeholder='Purchase Price' />
+          </Form.Item>
+          <Form.Item name={'sellingPrice'} label="Selling Price" rules={[{ required: true, message: "please enter Selling Price" }]}>
+            <Input placeholder='Selling Price' />
+          </Form.Item>
+          <Form.Item>
           <Button htmlType='submit' className='w-full '>Submit</Button>
         </Form.Item>
+        </Form>
       </Modal>
     </div>
   )
