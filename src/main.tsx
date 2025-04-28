@@ -31,6 +31,7 @@ import Warehouse from './pages/Warehouse.tsx'
 import Location from './pages/Location.tsx'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import OtherExpenses from './pages/OtherExpenses.tsx'
+import Variant from './pages/Variant.tsx'
 
 
 
@@ -86,6 +87,10 @@ const router = createBrowserRouter([
       {
         path:'/Purchase',
         element: <Purchase/>
+      },
+      {
+        path:'/Variant',
+        element: <Variant/>
       },
       {
         path:'/PurchaseItems',

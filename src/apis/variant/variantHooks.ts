@@ -1,14 +1,14 @@
 import { useMutation } from "react-query"
 import { deleteVariant, postVariant, putVariant } from "./variantApi"
 
-export const useCreateUnits = () => {
+export const useCreateVariant = () => {
     return useMutation((data: any) => postVariant(data))
 }
 
-export const useUpdateUnits = () => {
+export const useUpdateVariant = () => {
     return useMutation((data: any) => putVariant(data))
 }
 
-export const useDeleteUnits = () => {
+export const useDeleteVariant = () => {
     return useMutation((data: any) => deleteVariant(data))
 }

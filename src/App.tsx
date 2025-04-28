@@ -75,6 +75,9 @@ function App() {
             <Link to= '/Purchase'>Purchase</Link> 
             </Menu.Item>
             <Menu.Item>
+            <Link to= '/Variant'>Variant</Link> 
+            </Menu.Item>
+            <Menu.Item>
             <Link to= '/PurchaseItems'>Purchase Items</Link>  
             </Menu.Item>
             <Menu.Item>

@@ -11,6 +11,8 @@ import { getstores } from '../apis/storess/storesApi';
 import { getWarehouse } from '../apis/warehouse/warehouseApi';
 import { getProduct } from '../apis/products/productApi';
 import { getUnits } from '../apis/units/unitsApi';
+import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
+import { getVariant } from '../apis/variant/variantApi';
 
 interface DataType {
   key: React.Key;
@@ -58,38 +60,36 @@ const columns: TableColumnsType<DataType> = [
   }
 ];
 
-
-
 function Purchase() {
-  const { data, isLoading, error, refetch } = useQuery("getPurchase", getPurchase)
-  const { data: vendorsdata, isLoading: vendorsloading } = useQuery("getVendors", getVendors)
-  const { data: productdata, isLoading: productloading } = useQuery("getProduct", getProduct)
-  const { data: unitdata, isLoading: unitloading } = useQuery("getUnits", getUnits)
-  const { data: storesdata, isLoading: storesloading } = useQuery("getStores", getstores)
-  const { data: warehousedata, isLoading: warehouseloading } = useQuery("getWarehouse", getWarehouse)
-  const [addModal, setAddModal] = useState(false)
-  const { mutate: Create } = useCreatePurchase()
+  const { data, isLoading, error, refetch } = useQuery("getPurchase", getPurchase);
+  const { data: vendorsdata } = useQuery("getVendors", getVendors);
+  const { data: productdata } = useQuery("getProduct", getProduct);
+  const { data: unitdata } = useQuery("getUnits", getUnits);
+  const { data: storesdata } = useQuery("getStores", getstores);
+  const { data: variantdata } = useQuery("getVariant", getVariant);
+  const { data: warehousedata } = useQuery("getWarehouse", getWarehouse);
+  const [addModal, setAddModal] = useState(false);
+  const { mutate: Create } = useCreatePurchase();
 
-  const [form] = Form.useForm()
+  const [form] = Form.useForm();
+
   if (error) {
-    return message.error("data fetching error")
+    return message.error("data fetching error");
   }
-
 
   const onFinish = (value: any) => {
     Create(value, {
       onSuccess() {
-        message.success("added successfully")
-        refetch()
-        setAddModal(false)
-        form.resetFields()
+        message.success("added successfully");
+        refetch();
+        setAddModal(false);
+        form.resetFields();
       },
       onError() {
-        message.error("faild")
+        message.error("failed");
       }
-    })
-  }
-
+    });
+  };
 
   return (
     <div>
@@ -110,104 +110,175 @@ function Purchase() {
         footer={null}
         width={1200}
       >
-        <Form layout='vertical' onFinish={onFinish} form={form} className='
-         grid grid-flow-row grid-cols-4 gap-2'>
-          <Form.Item name={'billNo'} label="Bill No" rules={[{ required: true, message: "please enter Name" }]}>
-            <Input placeholder='billNo' />
-          </Form.Item>
-          <Form.Item
-            name={'vendorId'}
-            label="Vendors ID"
-            rules={[{ required: true, message: "Please select a vendor" }]}
-          >
-            <Select
-              placeholder="Select a Vendor"
-              options={
-                !vendorsloading && vendorsdata?.data.map((subcat: { _id: string; name: string }) => ({
-                  value: subcat._id,
-                  label: subcat.name
-                }))
-              }
-            />
-          </Form.Item>
-          <Form.Item
-            name={'storeId'}
-            label="Stores ID"
-            rules={[{ required: true, message: "Please select a store" }]}
-          >
-            <Select
-              placeholder="Select a Stores"
-              options={
-                !storesloading && storesdata?.data.map((subcat: { _id: string; name: string }) => ({
-                  value: subcat._id,
-                  label: subcat.name
-                }))
-              }
-            />
-          </Form.Item>
-          <Form.Item
-            name={'warehouseId'}
-            label="warehouse ID"
-            rules={[{ required: true, message: "Please select a Warehouse" }]}
-          >
-            <Select
-              placeholder="Select a Warehouse"
-              options={
-                !warehouseloading && warehousedata?.data.map((subcat: { _id: string; name: string }) => ({
-                  value: subcat._id,
-                  label: subcat.name
-                }))
-              }
-            />
-          </Form.Item>
-          <Form.Item name={'totalAmount'} label="Total Amount" rules={[{ required: true, message: "please enter VAT" }]}>
-            <Input placeholder='totalAmount' />
-          </Form.Item>
+        <Form layout='vertical' onFinish={onFinish} form={form}>
+          <div className='grid grid-flow-row grid-cols-4 gap-2'>
+            <Form.Item name={'billNo'} label="Bill No" rules={[{ required: true, message: "please enter Bill No" }]}>
+              <Input placeholder='billNo' />
+            </Form.Item>
+            <Form.Item
+              name={'vendorId'}
+              label="Vendors ID"
+              rules={[{ required: true, message: "Please select a vendor" }]}
+            >
+              <Select
+                placeholder="Select a Vendor"
+                options={vendorsdata?.data?.map((vendor: { _id: string; name: string }) => ({
+                  value: vendor._id,
+                  label: vendor.name
+                }))}
+              />
+            </Form.Item>
+            <Form.Item
+              name={'storeId'}
+              label="Stores ID"
+              rules={[{ required: true, message: "Please select a store" }]}
+            >
+              <Select
+                placeholder="Select a Stores"
+                options={storesdata?.data?.map((store: { _id: string; name: string }) => ({
+                  value: store._id,
+                  label: store.name
+                }))}
+              />
+            </Form.Item>
+            <Form.Item
+              name={'warehouseId'}
+              label="Warehouse ID"
+              rules={[{ required: true, message: "Please select a Warehouse" }]}
+            >
+              <Select
+                placeholder="Select a Warehouse"
+                options={warehousedata?.data?.map((warehouse: { _id: string; name: string }) => ({
+                  value: warehouse._id,
+                  label: warehouse.name
+                }))}
+              />
+            </Form.Item>
+            <Form.Item name={'totalAmount'} label="Total Amount" rules={[{ required: true, message: "Please enter total amount" }]}>
+              <Input placeholder='totalAmount' />
+            </Form.Item>
+          </div>
           <Divider orientation="left">Purchase Items</Divider>
-          <Form.Item
-            name={'productId'}
-            label="product ID"
-            rules={[{ required: true, message: "Please select a Product ID" }]}
-          >
-            <Select
-              placeholder="Select a Product"
-              options={
-                !productloading && productdata?.data.map((product: { _id: string; }) => ({
-                  value: product._id
-                }))
-              }
-            />
-          </Form.Item>
-          <Form.Item
-            name={'unitId'}
-            label="Unit ID"
-            rules={[{ required: true, message: "Please select a Unit ID" }]}
-          >
-            <Select
-              placeholder="Select a Unit"
-              options={
-                !unitloading && unitdata?.data.map((Unit: { _id: string; }) => ({
-                  value: Unit._id
-                }))
-              }
-            />
-          </Form.Item>
-          <Form.Item name={'quantity'} label="Quantity" rules={[{ required: true, message: "please enter Quantity" }]}>
-            <Input placeholder='Quantity' />
-          </Form.Item>
-          <Form.Item name={'purchasePrice'} label="Purchase Price" rules={[{ required: true, message: "please enter Purchase Price" }]}>
-            <Input placeholder='Purchase Price' />
-          </Form.Item>
-          <Form.Item name={'sellingPrice'} label="Selling Price" rules={[{ required: true, message: "please enter Selling Price" }]}>
-            <Input placeholder='Selling Price' />
-          </Form.Item>
-          <Form.Item>
-          <Button htmlType='submit' className='w-full '>Submit</Button>
-        </Form.Item>
+          <div className="p-6 bg-white rounded-xl shadow-md">
+            <Form.List
+              name="purchaseItems"
+              rules={[
+                {
+                  validator: async (_, items) => {
+                    if (!items || items.length < 1) {
+                      return Promise.reject(new Error('Please add at least 1 item.'));
+                    }
+                  },
+                },
+              ]}
+            >
+              {(fields, { add, remove }, { errors }) => (
+                <>
+                  {fields.map((field) => (
+                    <div key={field.key} className="grid grid-cols-12 gap-4 items-end">
+                      <Form.Item
+                        {...field}
+                        className="col-span-4"
+                        name={[field.name, 'productId']}
+                        rules={[{ required: true, message: 'Please select a product' }]}
+                      >
+                        <Select
+                          placeholder="Select Product"
+                          options={productdata?.data?.map((product: { _id: string; name: string }) => ({
+                            value: product._id,
+                            label: product.name,
+                          }))}
+                        />
+                      </Form.Item>
+
+                      <Form.Item
+                        className="col-span-4"
+                        name={[field.name, 'unitId']}
+                        rules={[{ required: true, message: 'Please select a unit' }]}
+                      >
+                        <Select
+                          placeholder="Select Unit"
+                          options={unitdata?.data?.map((unit: { _id: string; name: string }) => ({
+                            value: unit._id,
+                            label: unit.name,
+                          }))}
+                        />
+                      </Form.Item>
+
+                      <Form.Item
+                        className="col-span-3"
+                        name={[field.name, 'quantity']}
+                        rules={[{ required: true, message: 'Please enter quantity' }]}
+                      >
+                        <Input placeholder="Quantity" type="number" />
+                      </Form.Item>
+
+                      <Form.Item
+                        className="col-span-3"
+                        name={[field.name, 'purchasePrice']}
+                        rules={[{ required: true, message: 'Please enter purchase price' }]}
+                      >
+                        <Input placeholder="Purchase Price" type="number" />
+                      </Form.Item>
+
+                      <Form.Item
+                        className="col-span-3"
+                        name={[field.name, 'sellingPrice']}
+                        rules={[{ required: true, message: 'Please enter selling price' }]}
+                      >
+                        <Input placeholder="Selling Price" type="number" />
+                      </Form.Item>
+
+                      <Form.Item
+                        {...field}
+                        className="col-span-4"
+                        name={[field.name, 'variantId']}
+                        rules={[{ required: true, message: 'Please select variant' }]}
+                      >
+                        <Select
+                          placeholder="Select Variant"
+                          options={variantdata?.data?.map((variant: { _id: string; }) => ({
+                            value: variant._id,
+                            // label: variant.name,
+                          }))}
+                        />
+                      </Form.Item>
+
+                      <Button
+                        type="text"
+                        danger
+                        onClick={() => remove(field.name)}
+                        className="col-span-1"
+                      >
+                        Remove
+                      </Button>
+                    </div>
+                  ))}
+
+                  <Form.Item>
+                    <Button
+                      type="dashed"
+                      onClick={() => add()}
+                      block
+                      icon={<PlusOutlined />}
+                    >
+                      Add Item
+                    </Button>
+                    <Form.ErrorList errors={errors} />
+                  </Form.Item>
+                </>
+              )}
+            </Form.List>
+            <Form.Item className="mt-6">
+              <Button type="primary" htmlType="submit" className="w-full">
+                Submit
+              </Button>
+            </Form.Item>
+          </div>
         </Form>
       </Modal>
     </div>
-  )
+  );
 }
 
-export default Purchase
+export default Purchase;
