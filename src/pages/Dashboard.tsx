@@ -19,19 +19,15 @@ const columns: TableColumnsType<DataType> = [
   }
 ];
 
-const data: DataType[] = [
-  {
-    key: '1',
-    name: 'www',
-    email: "ndsj"
-  },
-];
 
 function Dashboard() {
   return (
     <div>
       <Divider>Users Table</Divider>
-      <Table<DataType> columns={columns} dataSource={data} size="middle" />
+      <Table 
+      columns={columns} 
+      // dataSource={data} 
+      size="middle" />
     </div>
   )
 }

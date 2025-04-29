@@ -32,6 +32,7 @@ import Location from './pages/Location.tsx'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import OtherExpenses from './pages/OtherExpenses.tsx'
 import Variant from './pages/Variant.tsx'
+import Login from './pages/Login.tsx'
 
 
 
@@ -153,6 +154,10 @@ const router = createBrowserRouter([
         element: <Location/>
       },
     ]
+  },
+  {
+    path:'/Login',
+    element:<Login/>
   }
 ])
 
