@@ -11,7 +11,7 @@ import { getstores } from '../apis/storess/storesApi';
 import { getWarehouse } from '../apis/warehouse/warehouseApi';
 import { getProduct } from '../apis/products/productApi';
 import { getUnits } from '../apis/units/unitsApi';
-import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
+import { PlusOutlined } from '@ant-design/icons';
 import { getVariant } from '../apis/variant/variantApi';
 
 interface DataType {

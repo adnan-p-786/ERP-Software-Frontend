@@ -19,19 +19,16 @@ const columns: TableColumnsType<DataType> = [
   }
 ];
 
-const data: DataType[] = [
-  {
-    key: '1',
-    name: 'www',
-    email: "ndsj"
-  },
-];
+
 
 const Users: React.FC = () => {
   return (
     <div>
-      <Divider>Users Table</Divider>
-      <Table<DataType> columns={columns} dataSource={data} size="middle" />
+      <Divider>Users</Divider>
+      <Table 
+      columns={columns} 
+      // dataSource={data} 
+      size="middle" />
     </div>
   );
 };
