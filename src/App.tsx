@@ -78,9 +78,6 @@ function App() {
             <Link to= '/Variant'>Variant</Link> 
             </Menu.Item>
             <Menu.Item>
-            <Link to= '/PurchaseItems'>Purchase Items</Link>  
-            </Menu.Item>
-            <Menu.Item>
             <Link to= '/Accounts'>Accounts</Link>  
             </Menu.Item>
           </SubMenu>
@@ -88,9 +85,6 @@ function App() {
           <SubMenu key={'5'} title="SALES">
             <Menu.Item>
             <Link to= '/Sales'>Sales</Link>
-            </Menu.Item>
-            <Menu.Item>
-            <Link to= '/SalesItems'>Sales Items</Link> 
             </Menu.Item>
             <Menu.Item>
             <Link to= '/Discounts'>Discounts</Link> 

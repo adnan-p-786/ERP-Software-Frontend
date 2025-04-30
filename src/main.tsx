@@ -15,9 +15,7 @@ import SubCategories from './pages/SubCategories.tsx'
 import Brand from './pages/Brand.tsx'
 import Units from './pages/Units.tsx'
 import Purchase from './pages/Purchase.tsx'
-import PurchaseItems from './pages/PurchaseItems.tsx'
 import Accounts from './pages/Accounts.tsx'
-import SalesItems from './pages/SalesItems.tsx'
 import Sales from './pages/Sales.tsx'
 import Discounts from './pages/Discounts.tsx'
 import Expense from './pages/Expense.tsx'
@@ -35,8 +33,11 @@ import Variant from './pages/Variant.tsx'
 import Login from './pages/Login.tsx'
 
 
-
 const router = createBrowserRouter([
+  {
+    path:'/Login',
+    element:<Login/>
+  },
   {
     path:'/',
     element:<App/>,
@@ -94,20 +95,12 @@ const router = createBrowserRouter([
         element: <Variant/>
       },
       {
-        path:'/PurchaseItems',
-        element: <PurchaseItems/>
-      },
-      {
         path:'/Accounts',
         element: <Accounts/>
       },
       {
         path:'/Sales',
         element: <Sales/>
-      },
-      {
-        path:'/SalesItems',
-        element: <SalesItems/>
       },
       {
         path:'/Discounts',
@@ -154,10 +147,6 @@ const router = createBrowserRouter([
         element: <Location/>
       },
     ]
-  },
-  {
-    path:'/Login',
-    element:<Login/>
   }
 ])
 

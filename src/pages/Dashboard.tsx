@@ -1,33 +1,68 @@
-import React from 'react';
 import { Divider, Table } from 'antd';
-import type { TableColumnsType } from 'antd';
+import Chart from "react-apexcharts"
 
-interface DataType {
-  key: React.Key;
-  name: string;
-  email: string;
-}
-
-const columns: TableColumnsType<DataType> = [
+const series = [
   {
-    title: 'Name',
-    dataIndex: 'name',
+    name: 'Quantity',
+    type: 'column',
+    data: [200],
   },
   {
-    title: 'Email',
-    dataIndex: 'email',
-  }
+    name: 'Purchase Price',
+    type: 'line',
+    data: [15000],
+  },
+  {
+    name: 'Selling Price',
+    type: 'line',
+    data: [17000],
+  },
 ];
 
-
+const options: any = {
+  chart: {
+    height: 350,
+    type: 'line',
+  },
+  stroke: {
+    width: [0, 4, 4],
+  },
+  title: {
+    text: 'Stock Overview',
+  },
+  dataLabels: {
+    enabled: true,
+    enabledOnSeries: [1, 2],
+  },
+  labels: ['iPhone'],
+  xaxis: {
+    type: 'category',
+  },
+  yaxis: [
+    {
+      title: {
+        text: 'Quantity',
+      },
+    },
+    {
+      opposite: true,
+      title: {
+        text: 'Purchase Price',
+      },
+    },
+    {
+      opposite: true,
+      title: {
+        text: 'Selling Price',
+      },
+    },
+  ],
+};
 function Dashboard() {
   return (
     <div>
-      <Divider>Users Table</Divider>
-      <Table 
-      columns={columns} 
-      // dataSource={data} 
-      size="middle" />
+      <Divider>Dashboard</Divider>
+      <Chart  options={options} series={series} type='line' height={350}/>
     </div>
   )
 }

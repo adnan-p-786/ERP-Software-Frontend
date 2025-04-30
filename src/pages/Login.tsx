@@ -1,6 +1,5 @@
-// import axios from 'axios'
 import axios from 'axios'
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useNavigate } from 'react-router'
 
 function Login() {
@@ -12,20 +11,24 @@ function Login() {
     const onSubmitHandler = async (event) => {
         event.preventDefault();
         try {
-            const { data } = await axios.post(
+            const response = await axios.post(
                 'http://localhost:3000/api/login-user',
-                { password, email }
+                { password, email },{
+                }
             );
-            console.log(data);
+            console.log(response);
             
-            if (data.success) {
-                localStorage.setItem('token', data.data.token); // Save token
-                localStorage.setItem('id', data.data.id);
-                localStorage.setItem('email', data.data.email);
-                setEmail(data.data.email);
-                navigate('/Dashboard');
+            if (response.data) {
+                localStorage.setItem('token', response.data.token);
+                localStorage.setItem('id', response.data.id);
+                localStorage.setItem('email', response.data.email);
+                setEmail(response.data.email);
+               return  navigate('/Dashboard');
             }
-        } catch (error) {
+            else{
+              return  alert('not working')
+            }
+        } catch (error:any) {
             alert(error.response?.data?.message || 'Something went wrong');
         }
     };
@@ -54,7 +57,7 @@ function Login() {
                             onChange={(e) => setPassword(e.target.value)}
                             required
                         />
-                        <button className='bg-black rounded-md hover:cursor-pointer text-white h-10 w-full mt-5'>
+                        <button type='submit' className='bg-black rounded-md hover:cursor-pointer text-white h-10 w-full mt-5'>
                             Login
                         </button>
                     </div>

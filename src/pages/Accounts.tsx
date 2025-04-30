@@ -10,28 +10,32 @@ interface DataType {
 
 const columns: TableColumnsType<DataType> = [
   {
-    title: 'Name',
-    dataIndex: 'name',
+    title: 'Credit',
+    dataIndex: 'credit',
   },
   {
-    title: 'Email',
-    dataIndex: 'email',
-  }
+    title: 'Debit',
+    dataIndex: 'debit',
+  },
+  {
+    title: 'Type',
+    dataIndex: 'type',
+  },
+  {
+    title: 'Particulars',
+    dataIndex: 'particulars',
+  },
 ];
 
-const data: DataType[] = [
-  {
-    key: '1',
-    name: 'www',
-    email: "ndsj"
-  },
-];
 
 function Accounts() {
   return (
     <div>
-      <Divider>Users Table</Divider>
-      <Table<DataType> columns={columns} dataSource={data} size="middle" />
+      <Divider>Accounts</Divider>
+      <Table 
+      columns={columns} 
+      // dataSource={data} 
+      size="middle" />
     </div>
   )
 }
