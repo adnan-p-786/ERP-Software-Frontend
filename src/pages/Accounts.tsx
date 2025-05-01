@@ -1,6 +1,6 @@
-import React from 'react';
-import { Divider, Table } from 'antd';
-import type { TableColumnsType } from 'antd';
+import { Divider, Table, TableColumnsType } from "antd";
+import { useQuery } from 'react-query';
+import { getAccounts } from '../apis/Accounts/AccountApi';
 
 interface DataType {
   key: React.Key;
@@ -24,18 +24,20 @@ const columns: TableColumnsType<DataType> = [
   {
     title: 'Particulars',
     dataIndex: 'particulars',
-  },
+  }
 ];
 
 
 function Accounts() {
+  const { data, isLoading,} = useQuery("getAccounts", getAccounts)
   return (
     <div>
       <Divider>Accounts</Divider>
       <Table 
       columns={columns} 
-      // dataSource={data} 
-      size="middle" />
+      dataSource={data?.data} 
+      loading={isLoading}
+      size="large" />
     </div>
   )
 }

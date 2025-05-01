@@ -1,6 +1,7 @@
-import React from 'react';
-import { Divider, Table } from 'antd';
-import type { TableColumnsType } from 'antd';
+import { Divider, Table, TableColumnsType } from "antd";
+import { getUser } from "../apis/users/userApi";
+import { useQuery } from "react-query";
+
 
 interface DataType {
   key: React.Key;
@@ -19,18 +20,19 @@ const columns: TableColumnsType<DataType> = [
   }
 ];
 
+function Users() {
+  const { data, isLoading,} = useQuery("getUser", getUser)
 
-
-const Users: React.FC = () => {
   return (
     <div>
-      <Divider>Users</Divider>
+      <Divider>User</Divider>
       <Table 
       columns={columns} 
-      // dataSource={data} 
+      dataSource={data?.data} 
+      loading={isLoading}
       size="middle" />
     </div>
-  );
-};
+  )
+}
 
-export default Users;
+export default Users

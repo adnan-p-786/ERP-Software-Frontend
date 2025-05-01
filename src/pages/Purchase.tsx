@@ -99,6 +99,8 @@ function Purchase() {
       </div>
       <Table
         columns={columns}
+        style={{ height: '350px', overflowY: 'auto' }} 
+        pagination={false} 
         dataSource={data?.data}
         loading={isLoading}
         size="middle" />

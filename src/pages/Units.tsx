@@ -37,7 +37,6 @@ const columns: TableColumnsType<DataType> = [
 function Units() {
   const { data, isLoading, error, refetch } = useQuery("getUnits", getUnits)
   const [addModal, setAddModal] = useState(false)
-  const [updateModal, setUpdateModal] = useState(false)
   const { mutate: Create } = useCreateUnits()
   const [form] = Form.useForm()
   if (error) {

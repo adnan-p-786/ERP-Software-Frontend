@@ -2,19 +2,11 @@ import { apiCLient } from "../ApiCLient"
 const token = localStorage.getItem('token');
 
 export const getAccounts = ()=>{
-    return apiCLient.get('/api/get-Accounts'),{
-        headers: {
-            Authorization: `Bearer ${token}`,
-        },
-    }
+    return apiCLient.get('/api/get-Accounts')
 }
 
 export const postAccounts =(data:any)=>{
-    return apiCLient.post('/api/post-Accounts',data),{
-        headers: {
-          Authorization: `Bearer ${token}`,
-        }
-    }
+    return apiCLient.post('/api/post-Accounts',data)
 }
 
 export const putAccounts = (data:any)=>{
