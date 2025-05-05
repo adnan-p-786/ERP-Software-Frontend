@@ -24,7 +24,7 @@ const columns: TableColumnsType<DataType> = [
 
   {
     title: "Action",
-    render: (record) => (
+    render: () => (
       <div className="flex gap-2">
         <Button><CiEdit /> Edit</Button>
         <Button><MdDeleteOutline /> Delete</Button>
@@ -37,7 +37,6 @@ const columns: TableColumnsType<DataType> = [
 function Categories() {
   const { data, isLoading, error, refetch } = useQuery("getCategoryies", getCategory)
   const [addModal, setAddModal] = useState(false)
-  const [updateModal, setUpdateModal] = useState(false)
   const { mutate: Create } = useCreateCategory()
   const [form] = Form.useForm()
   if (error) {

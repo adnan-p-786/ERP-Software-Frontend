@@ -6,7 +6,7 @@ import {
 import { Button, Layout, Menu, theme } from 'antd';
 import SubMenu from 'antd/es/menu/SubMenu';
 import { useState } from 'react';
-import { Link, Outlet } from 'react-router-dom';
+import { Link, Outlet, useNavigate } from 'react-router-dom';
 import { MdDashboard } from "react-icons/md";
 import { HiOutlineUsers } from "react-icons/hi2";
 import { BiPurchaseTag } from "react-icons/bi";
@@ -20,6 +20,16 @@ function App() {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
 
+
+  const navigate = useNavigate();
+  function handleLogout() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('id');
+    localStorage.removeItem('email');
+    alert('Logout successful');
+    navigate('/Login'); 
+  }
+
   return (
     <>
       <Layout className='h-screen'>
@@ -30,6 +40,7 @@ function App() {
             mode="inline"
             defaultSelectedKeys={['1']}
           >
+
             <Menu.Item key={'1'} icon={<MdDashboard />}>
               <Link to='/Dashboard'> DASHBOARD </Link>
             </Menu.Item>
@@ -133,6 +144,15 @@ function App() {
                 <Link to='/Location'>Location</Link>
               </Menu.Item>
             </SubMenu>
+            <div className='mt-35'>
+              <Menu.Item>
+               <Link to='/Login'><button className='text-xl text-center m-15'>Login</button></Link>
+              </Menu.Item>
+              
+              <Menu.Item>
+                <button onClick={handleLogout} className='text-xl text-center m-15 '>Logout</button>
+              </Menu.Item>
+            </div>
 
           </Menu>
         </Sider>
@@ -161,6 +181,8 @@ function App() {
             <Outlet />
           </Content>
         </Layout>
+
+
       </Layout>
     </>
   )

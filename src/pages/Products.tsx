@@ -62,7 +62,7 @@ const columns: TableColumnsType<DataType> = [
   },
   {
    title: "Action",
-   render: (record) => (
+   render: () => (
      <div className="flex gap-2">
        <Button><CiEdit /> Edit</Button>
        <Button><MdDeleteOutline /> Delete</Button>

@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router'
 
 function Login() {
@@ -20,8 +20,8 @@ function Login() {
             
             if (response.data) {
                 localStorage.setItem('token', response.data.token);
-                localStorage.setItem('id', response.data.id);
-                localStorage.setItem('email', response.data.email);
+                localStorage.setItem('id', response.data.user._id);
+                localStorage.setItem('email', response.data.user.email);
                 setEmail(response.data.email);
                return  navigate('/Dashboard');
             }
@@ -32,9 +32,8 @@ function Login() {
             alert(error.response?.data?.message || 'Something went wrong');
         }
     };
-    
 
-
+  
     return (
         <div>
             <form onSubmit={onSubmitHandler}>
@@ -63,7 +62,6 @@ function Login() {
                     </div>
                 </div>
             </form>
-
         </div>
     )
 }
